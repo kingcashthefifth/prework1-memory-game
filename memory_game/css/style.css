@@ -95,6 +95,16 @@ footer {
 	font-weight: 700;
 }
 
+.floatLeft {
+	font-family: Raleway, sans-serif;
+	color: #0D2C40;
+	letter-spacing: 1px;
+	font-weight: 600;
+	font-size: 20px;
+	float: left;
+/*	padding-left: 20px;
+*/}
+
 #myemail {
 	font-family: "Droid Serif", monospace;
 	line-height: 26px;

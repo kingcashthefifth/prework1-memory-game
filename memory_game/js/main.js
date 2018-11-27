@@ -21,14 +21,36 @@ var cards = [
 }
 ];
 
+var getFlipped = document.getElementsByClassName('flipped');
+var score = 0;
+var scoreBoard = document.getElementById('score');
+// var shuffleCard = function(array) {
+//     var array = [];
+//     while(cards.length !== 0) {
+//         let randomIndex = Math.floor(Math.random() * cards.length);
+//         array.push(cards[randomIndex]);
+//         cards.slice(randomIndex, 1);
+//     }
+//     return array;
+// }
+
+function shuffle(cards) {
+for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+}
+};
+
 var cardsInPlay = [];
 
 var checkForMatch = function () {
 	if (cardsInPlay.length === 2) {
 		if (cardsInPlay[0] === cardsInPlay[1]) {
-			alert('You found a match!');
+			document.getElementById('clickInfo').innerHTML = 'You found a match!';
+            ++score;
+            scoreBoard.innerHTML = "Score: " + score;
 		} else {
-			alert('Sorry, try again.');
+			document.getElementById('clickInfo').innerHTML = 'Sorry, try again.';
 		}
 	}
 }
@@ -36,6 +58,7 @@ var checkForMatch = function () {
 var flipCard = function () {
 	var cardId = this.getAttribute('data-id');
 	this.setAttribute('src', cards[cardId].cardImage);
+    this.setAttribute('class', 'flipped');
 	console.log('User flipped ' + cards[cardId].rank);
 	console.log(cards[cardId].cardImage);
 	console.log(cards[cardId].suit);
@@ -51,5 +74,23 @@ var createBoard = function () {
 		cardElement.addEventListener('click', flipCard);
 		document.getElementById('game-board').appendChild(cardElement);
 	}
+//     shuffleCard(cards);
 }
+// var resetting = function() {
+//     window.location.reload();
+// };
+// document.getElementById('resetButton').addEventListener('click', resetting());
+var reloading = function() {
+    for (var i = 0; i < getFlipped.length; i++) {
+        getFlipped[i].setAttribute('src', 'images/back.png');
+    };
+    cardsInPlay = [];
+    shuffle(cards);
+};
+var resetButtonn = document.getElementById('resetButton');
+resetButtonn.addEventListener('click', reloading);
+
+ // jumbotronDisplayButton.onclick = function() {
+ //   window.location.reload();
+ // };
 createBoard();
